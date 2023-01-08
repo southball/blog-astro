@@ -20,8 +20,11 @@ const { title, tags, category } = Astro.props.frontmatter;
       {title}
     </div>
     <div>
-      Category: <a class="underline" href={`/category/${category ?? "uncategorized"}`}
-        >{category ?? "uncategorized"}</a>
+      Category: <a
+        class="underline"
+        href={`/category/${category ?? "uncategorized"}`}
+        >{category ?? "uncategorized"}</a
+      >
     </div>
     <div>
       Tags: {
@@ -35,6 +38,18 @@ const { title, tags, category } = Astro.props.frontmatter;
 
     <hr class="my-2" />
 
-    <slot />
+    <div class="blog-post-body">
+      <slot />
+    </div>
   </Container>
 </BaseLayout>
+
+<style is:global>
+  .blog-post-body p {
+    @apply mb-2;
+  }
+
+  .blog-post-body a {
+    @apply underline;
+  }
+</style>
