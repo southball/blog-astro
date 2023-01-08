@@ -1,0 +1,21 @@
+---
+import type { MarkdownInstance } from "astro";
+import PostPreview from "./PostPreview.astro";
+
+export interface Props {
+  posts: MarkdownInstance<any>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<div>
+  {
+    posts.map((post, index) => (
+      <>
+        <PostPreview post={post} />
+        {index !== posts.length - 1 ? <hr /> : null}
+      </>
+    ))
+  }
+</div>

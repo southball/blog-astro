@@ -1,0 +1,23 @@
+---
+import Container from "../components/Container.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+---
+
+<PageLayout title="Navigation">
+  <Container>
+    <h1 class="text-xl">Navigation</h1>
+    <ul class="list-disc ml-4">
+      <li>
+        <a class="text-blue-600 dark:text-blue-300" href="/">Home</a>
+      </li>
+      <li>
+        <a class="text-blue-600 dark:text-blue-300" href="/categories"
+          >Categories</a
+        >
+      </li>
+      <li>
+        <a class="text-blue-600 dark:text-blue-300" href="/tags">Tags</a>
+      </li>
+    </ul>
+  </Container>
+</PageLayout>

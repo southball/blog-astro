@@ -1,0 +1,18 @@
+---
+import type { MarkdownInstance } from "astro";
+import { format } from "date-fns";
+
+export interface Props {
+  post: MarkdownInstance<any>;
+}
+
+const {
+  url,
+  frontmatter: { title, published },
+} = Astro.props.post;
+---
+
+<article>
+  <a class="underline underline-offset-4 text-lg" href={url}>{title}</a>
+  {format(new Date(published), "yyyy-MM-dd")}
+</article>

@@ -1,0 +1,31 @@
+---
+import Container from "../../components/Container.astro";
+import PostPreviewList from "../../components/PostPreviewList.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await Astro.glob("../posts/*.md");
+  return [
+    { params: { category: "uncategorized" } },
+    ...posts
+      .map((post) => post.frontmatter.category)
+      .filter((category) => category)
+      .map((category) => ({ params: { category } })),
+  ];
+}
+
+const { category } = Astro.params;
+const posts = await Astro.glob("../posts/*.md").then((posts) =>
+  posts.filter(
+    (post) =>
+      post.frontmatter.category === category ||
+      (category === "uncategorized" && !post.frontmatter.category)
+  )
+);
+---
+
+<PageLayout title={`category: ${category}`}>
+  <Container>
+    <PostPreviewList posts={posts} />
+  </Container>
+</PageLayout>

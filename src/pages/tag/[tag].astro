@@ -1,0 +1,26 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import Container from "../../components/Container.astro";
+import PostPreviewList from "../../components/PostPreviewList.astro";
+
+export async function getStaticPaths() {
+  const posts = await Astro.glob("../posts/*.md");
+  return posts
+    .flatMap((post) => post.frontmatter.tags ?? [])
+    .map((tag) => ({ params: { tag } }));
+}
+
+const { tag } = Astro.params;
+const posts = await Astro.glob("../posts/*.md").then((posts) =>
+  posts.filter((post) => (post.frontmatter.tags ?? []).includes(tag))
+);
+---
+
+<PageLayout title={`Tag: ${tag}`}>
+  <Container>
+    <div class="text-2xl">
+      Posts with tag <span class="font-bold">{tag}</span>
+    </div>
+    <PostPreviewList posts={posts} />
+  </Container>
+</PageLayout>

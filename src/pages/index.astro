@@ -1,0 +1,21 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import Container from "../components/Container.astro";
+import PostPreviewList from "../components/PostPreviewList.astro";
+
+const posts = await Astro.glob("./posts/*.md").then((posts) =>
+  posts.sort((post1, post2) =>
+    post1.frontmatter.published < post2.frontmatter.published
+      ? 1
+      : post1.frontmatter.published > post2.frontmatter.published
+      ? -1
+      : 0
+  )
+);
+---
+
+<PageLayout title="Home">
+  <Container>
+    <PostPreviewList posts={posts} />
+  </Container>
+</PageLayout>
