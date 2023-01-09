@@ -12,7 +12,7 @@ const { posts } = Astro.props;
 <div>
   {
     posts.map((post, index) => (
-      <div class="mb-1">
+      <div class="mb-2 max-[400px]:mb-4">
         <PostPreview post={post} />
       </div>
     ))

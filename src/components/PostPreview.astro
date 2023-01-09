@@ -13,6 +13,9 @@ const {
 ---
 
 <article>
-  <a class="underline underline-offset-4 text-lg" href={external ?? url}>{title}</a>
-  <span class="text-sm">{format(new Date(published), "yyyy-MM-dd")}</span>
+  <a
+    class="underline underline-offset-4 leading-none"
+    href={external ?? url}>{title}</a
+  >
+  <span class="text-xs">{format(new Date(published), "yyyy-MM-dd")}</span>
 </article>
