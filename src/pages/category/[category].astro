@@ -26,6 +26,18 @@ const posts = await Astro.glob("../posts/*.md").then((posts) =>
 
 <PageLayout title={`category: ${category}`}>
   <Container>
+    <div class="text-2xl">
+      Posts {
+        category !== "uncategorized" ? (
+          <>
+            with category <span class="font-bold">{category}</span>
+          </>
+        ) : (
+          "uncategorized"
+        )
+      }
+    </div>
+
     <PostPreviewList posts={posts} />
   </Container>
 </PageLayout>
