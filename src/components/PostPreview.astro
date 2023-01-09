@@ -8,11 +8,11 @@ export interface Props {
 
 const {
   url,
-  frontmatter: { title, published },
+  frontmatter: { title, published, external },
 } = Astro.props.post;
 ---
 
 <article>
-  <a class="underline underline-offset-4 text-lg" href={url}>{title}</a>
+  <a class="underline underline-offset-4 text-lg" href={external ?? url}>{title}</a>
   <span class="text-sm">{format(new Date(published), "yyyy-MM-dd")}</span>
 </article>
