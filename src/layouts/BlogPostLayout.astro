@@ -45,11 +45,33 @@ const { title, tags, category } = Astro.props.frontmatter;
 </BaseLayout>
 
 <style is:global>
-  .blog-post-body p {
-    @apply mb-2;
+  .blog-post-body p,
+  .blog-post-body pre {
+    @apply mb-4;
   }
 
   .blog-post-body a {
     @apply underline;
+  }
+
+  .blog-post-body h1,
+  .blog-post-body h2,
+  .blog-post-body h3,
+  .blog-post-body h4,
+  .blog-post-body h5,
+  .blog-post-body h6 {
+    @apply mb-1 font-semibold;
+  }
+
+  .blog-post-body h1 {
+    @apply text-2xl mb-2;
+  }
+
+  .blog-post-body h2 {
+    @apply text-xl;
+  }
+
+  .blog-post-body h3 {
+    @apply text-lg;
   }
 </style>
