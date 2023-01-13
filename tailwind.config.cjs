@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      sans: ['"Century Gothic", CenturyGothic, AppleGothic, sans-serif', ...defaultTheme.fontFamily.sans],
+      sans: [...defaultTheme.fontFamily.sans],
       serif: [...defaultTheme.fontFamily.serif],
       mono: [...defaultTheme.fontFamily.mono],
     },

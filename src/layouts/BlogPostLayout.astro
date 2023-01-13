@@ -2,6 +2,7 @@
 import BaseLayout from "./BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Container from "../components/Container.astro";
+import { Icon } from "astro-icon";
 
 export interface Props {
   title: string;
@@ -16,18 +17,20 @@ const { title, tags, category } = Astro.props.frontmatter;
   <div class="pb-2"></div>
 
   <Container>
-    <div class="text-xl font-bold">
+    <div class="text-3xl mb-1">
       {title}
     </div>
     <div>
-      Category: <a
+      <Icon class="h-4 inline" name="mdi:hashtag" />
+      <a
         class="underline"
         href={`/category/${category ?? "uncategorized"}`}
         >{category ?? "uncategorized"}</a
       >
     </div>
     <div>
-      Tags: {
+      <Icon class="h-4 inline" name="mdi:tag-multiple" />
+      {
         tags.map((tag: string) => (
           <a class="underline" href={`/tag/${tag}`}>
             {tag}
@@ -36,7 +39,7 @@ const { title, tags, category } = Astro.props.frontmatter;
       }
     </div>
 
-    <hr class="my-2" />
+    <hr class="my-4" />
 
     <div class="blog-post-body">
       <slot />
@@ -44,34 +47,70 @@ const { title, tags, category } = Astro.props.frontmatter;
   </Container>
 </BaseLayout>
 
-<style is:global>
-  .blog-post-body p,
-  .blog-post-body pre {
-    @apply mb-4;
-  }
+<style lang="scss" is:global>
+  .blog-post-body {
+    p,
+    pre,
+    table,
+    blockquote {
+      @apply mb-4;
+    }
 
-  .blog-post-body a {
-    @apply underline;
-  }
+    hr {
+      @apply my-4;
+    }
+    a {
+      @apply underline;
+    }
 
-  .blog-post-body h1,
-  .blog-post-body h2,
-  .blog-post-body h3,
-  .blog-post-body h4,
-  .blog-post-body h5,
-  .blog-post-body h6 {
-    @apply mb-1 font-semibold;
-  }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply mt-4 mb-2;
+    }
+    h1,
+    h2,
+    h3,
+    h4 {
+      @apply font-extralight;
+    }
+    h1 {
+      @apply text-3xl;
+    }
+    h2 {
+      @apply text-2xl;
+    }
+    h3 {
+      @apply text-xl;
+    }
+    h4 {
+      @apply text-lg;
+    }
+    h5,
+    h6 {
+      @apply font-bold uppercase;
+    }
+    h6 {
+      @apply text-sm;
+    }
 
-  .blog-post-body h1 {
-    @apply text-2xl mb-2;
-  }
+    ul,
+    ol {
+      @apply ml-4;
+    }
+    ul {
+      @apply list-disc;
+    }
+    ol {
+      @apply list-decimal;
+    }
 
-  .blog-post-body h2 {
-    @apply text-xl;
-  }
-
-  .blog-post-body h3 {
-    @apply text-lg;
+    th,
+    td {
+      @apply px-2;
+    }
   }
 </style>
