@@ -18,7 +18,7 @@ const posts = await Astro.glob("../posts/*.md").then((posts) =>
 
 <PageLayout title={`Tag: ${tag}`}>
   <Container>
-    <div class="text-2xl">
+    <div class="text-2xl mb-2">
       Posts with tag <span class="font-bold">{tag}</span>
     </div>
     <PostPreviewList posts={posts} />
