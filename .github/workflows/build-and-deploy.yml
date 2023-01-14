@@ -3,6 +3,7 @@ name: Build and Deploy
 on:
   push:
     branches: [main]
+  pull_request:
 
 permissions:
   contents: read
@@ -24,6 +25,7 @@ jobs:
           path: dist/
 
   deploy:
+    if: github.ref == 'refs/head/master'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
