@@ -22,22 +22,22 @@ const { title, tags, category } = Astro.props.frontmatter;
     </div>
     <div>
       <Icon class="h-4 inline" name="mdi:hashtag" />
-      <a
-        class="underline"
-        href={`/category/${category ?? "uncategorized"}`}
+      <a class="underline" href={`/category/${category ?? "uncategorized"}`}
         >{category ?? "uncategorized"}</a
       >
     </div>
-    <div>
-      <Icon class="h-4 inline" name="mdi:tag-multiple" />
-      {
-        tags.map((tag: string) => (
-          <a class="underline" href={`/tag/${tag}`}>
-            {tag}
-          </a>
-        ))
-      }
-    </div>
+    {
+      tags && tags.length > 0 && (
+        <div>
+          <Icon class="h-4 inline" name="mdi:tag-multiple" />
+          {tags.map((tag: string) => (
+            <a class="underline" href={`/tag/${tag}`}>
+              {tag}
+            </a>
+          ))}
+        </div>
+      )
+    }
 
     <hr class="my-4" />
 
@@ -111,6 +111,22 @@ const { title, tags, category } = Astro.props.frontmatter;
     th,
     td {
       @apply px-2;
+    }
+
+    blockquote {
+      @apply border-l-black dark:border-l-white border-l-2 pl-4;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .remark-mermaid-neutral {
+        display: none;
+      }
+    }
+
+    @media not (prefers-color-scheme: dark) {
+      .remark-mermaid-dark {
+        display: none;
+      }
     }
   }
 </style>
