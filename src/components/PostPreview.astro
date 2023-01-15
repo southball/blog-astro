@@ -9,13 +9,15 @@ export interface Props {
 
 const {
   url,
-  frontmatter: { title, published, external },
+  frontmatter: { title, published, external, icon },
 } = Astro.props.post;
 ---
 
 <article>
   {
-    external ? (
+    icon ? (
+      <Icon class="h-4 inline" name={icon} />
+    ) : external ? (
       <Icon class="h-4 inline" name="ph:globe" />
     ) : (
       <Icon class="h-4 inline" name="ph:pen-nib" />
