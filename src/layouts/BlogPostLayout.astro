@@ -97,6 +97,10 @@ const { title, tags, category } = Astro.props.frontmatter;
       @apply text-sm;
     }
 
+    pre, code {
+      font-size: 0.9rem;
+    }
+
     ul,
     ol {
       @apply ml-4;
@@ -115,6 +119,18 @@ const { title, tags, category } = Astro.props.frontmatter;
 
     blockquote {
       @apply border-l-black dark:border-l-white border-l-2 pl-4;
+    }
+
+    summary {
+      cursor: pointer;
+    }
+
+    details + * {
+      margin-top: 1rem;
+    }
+    
+    details + details {
+      margin-top: 0;
     }
 
     @media (prefers-color-scheme: dark) {
