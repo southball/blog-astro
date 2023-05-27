@@ -30,10 +30,10 @@ const { title, tags, category } = Astro.props.frontmatter;
       tags && tags.length > 0 && (
         <div>
           <Icon class="h-4 inline" name="mdi:tag-multiple" />
-          {tags.map((tag: string) => (
-            <a class="underline" href={`/tag/${tag}`}>
-              {tag}
-            </a>
+          {/* This part cannot be formatted */}
+          {tags.map((tag: string, index: number) => (
+            <span>{index !== 0 ? ", " : ""}</span>
+            <a class="underline" href={`/tag/${tag}`}>{tag}</a>
           ))}
         </div>
       )
@@ -97,7 +97,8 @@ const { title, tags, category } = Astro.props.frontmatter;
       @apply text-sm;
     }
 
-    pre, code {
+    pre,
+    code {
       font-size: 0.9rem;
     }
 
@@ -128,7 +129,7 @@ const { title, tags, category } = Astro.props.frontmatter;
     details + * {
       margin-top: 1rem;
     }
-    
+
     details + details {
       margin-top: 0;
     }
