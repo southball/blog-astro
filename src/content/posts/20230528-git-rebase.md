@@ -12,7 +12,7 @@ There may be many good articles about Git rebase, but I failed to find one that 
 
 # Forenote
 
-I am not 100% sure that all information is accurate. This article is mostly based on how I commonly use this feature of Git, and I try to ensure that the information accurate, but there are no guarantees.
+I am not 100% sure that all information is accurate. This article is mostly based on how I commonly use this feature of Git, and I try to ensure that the information is accurate, but there are no guarantees.
 
 # Features branches
 
