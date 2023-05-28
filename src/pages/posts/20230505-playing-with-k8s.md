@@ -4,6 +4,7 @@ title: "Playing with Kubernetes (1)"
 published: 2023-05-05
 category: kubernetes
 tags: [kubernetes]
+icon: "mdi:kubernetes"
 ---
 
 ## Creating Kubernetes Cluster
@@ -360,12 +361,12 @@ spec:
   selector:
     app: minio
   ports:
-  - name: api
-    port: 9000
-    targetPort: 9000
-  - name: console
-    port: 9001
-    targetPort: 9001
+    - name: api
+      port: 9000
+      targetPort: 9000
+    - name: console
+      port: 9001
+      targetPort: 9001
 ```
 
 </details>

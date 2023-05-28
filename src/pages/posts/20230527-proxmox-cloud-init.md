@@ -4,6 +4,7 @@ title: "Using cloud-init with Proxmox"
 published: 2023-05-27
 category: infra
 tags: [proxmox, cloud-init]
+icon: "simple-icons:proxmox"
 ---
 
 ## About Proxmox
