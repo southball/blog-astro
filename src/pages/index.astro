@@ -4,7 +4,9 @@ import Container from "../components/Container.astro";
 import PostPreviewList from "../components/PostPreviewList.astro";
 
 const posts = await Astro.glob("./posts/*.md").then((posts) =>
-  posts.sort(
+  posts
+  .filter((post) => import.meta.env.DEV || post.frontmatter.draft !== true)
+  .sort(
     (post1, post2) =>
       new Date(post2.frontmatter.published).getTime() -
       new Date(post1.frontmatter.published).getTime()
