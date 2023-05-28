@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@mdi/svg": "^7.1.96",
-    "@mermaid-js/mermaid-cli": "^10.1.0",
-    "@southball/remark-mermaid": "^0.2.2",
+    "@mermaid-js/mermaid-cli": "^9.3.0",
+    "@southball/remark-mermaid": "^0.3.0",
     "astro": "^2.5.5",
     "astro-icon": "^0.8.0",
     "date-fns": "^2.29.3"
