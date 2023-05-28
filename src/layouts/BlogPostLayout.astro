@@ -8,61 +8,102 @@ export interface Props {
   title: string;
   tags: string[];
   category?: string;
+  icon?: string;
 }
 
-const { title, tags, category } = Astro.props;
+const { title, tags, category, icon } = Astro.props;
 ---
 
 <BaseLayout title={title}>
   <Navbar />
 
-  <div class="pb-2"></div>
-
   <Container>
-    <div class="text-3xl mb-1">
+    <div class="blog-post">
+    <div class="blog-post__title">
+      {icon ? <Icon class="blog-post__title-icon" name={icon} /> : undefined}
       {title}
     </div>
-    <div>
-      <Icon class="h-4 inline" name="mdi:hashtag" />
-      <a class="underline" href={`/category/${category ?? "uncategorized"}`}
+    <div class="blog-post__section-category">
+      <Icon class="blog-post__section-icon" name="mdi:hashtag" />
+      <a class="blog-post__category" href={`/category/${category ?? "uncategorized"}`}
         >{category ?? "uncategorized"}</a
       >
     </div>
     {
       tags && tags.length > 0 && (
-        <div>
-          <Icon class="h-4 inline" name="mdi:tag-multiple" />
+        <div class="blog-post__section-tags">
+          <Icon class="blog-post__section-icon" name="mdi:tag-multiple" />
           {/* This part cannot be formatted */}
           {tags.map((tag: string, index: number) => (
             <span>{index !== 0 ? ", " : ""}</span>
-            <a class="underline" href={`/tag/${tag}`}>{tag}</a>
+            <a class="blog-post__tag" href={`/tag/${tag}`}>{tag}</a>
           ))}
         </div>
       )
     }
 
-    <hr class="my-4" />
+    <div class="blog-post__separator"></div>
 
-    <div class="blog-post-body">
+    <div class="blog-post__body">
       <slot />
     </div>
+  </div>
   </Container>
 </BaseLayout>
 
 <style lang="scss" is:global>
-  .blog-post-body {
+  .blog-post__title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .blog-post__title-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .blog-post__section-tags, .blog-post__section-category {
+    display: flex;
+    align-items: center;
+  }
+
+  .blog-post__section-icon {
+    margin-right: 0.25rem;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .blog-post__tag, .blog-post__category {
+    color: var(--link-color);
+    text-decoration: none;
+  }
+
+  .blog-post__separator {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #b4b4b4;
+  }
+
+  .blog-post__body {
     p,
     pre,
     table,
     blockquote {
-      @apply mb-4;
+      margin-bottom: 1rem;
     }
 
     hr {
-      @apply my-4;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
     }
     a {
-      @apply underline;
+      text-decoration: underline;
     }
 
     h1,
@@ -71,57 +112,61 @@ const { title, tags, category } = Astro.props;
     h4,
     h5,
     h6 {
-      @apply mt-4 mb-2;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
     }
     h1,
     h2,
     h3,
     h4 {
-      @apply font-extralight;
+      font-weight: 100;
     }
     h1 {
-      @apply text-3xl;
+      font-size: 1.5rem;
+      line-height: 2rem;
     }
     h2 {
-      @apply text-2xl;
+      font-size: 1.25rem;
+      line-height: 1.75rem;
     }
     h3 {
-      @apply text-xl;
+      font-size: 1.125rem;
+      line-height: 1.75rem;
     }
-    h4 {
-      @apply text-lg;
+    h4, h5, h6 {
+      font-weight: 700;
+      text-transform: uppercase;
     }
-    h5,
-    h6 {
-      @apply font-bold uppercase;
-    }
-    h6 {
-      @apply text-sm;
+    h5, h6 {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
     }
 
     pre,
     code {
-      font-size: 0.9rem;
+      font-size: 0.875rem;
     }
 
     ul,
     ol {
-      @apply ml-4;
+      margin-left: 1rem;
     }
     ul {
-      @apply list-disc;
+      list-style: disc;
     }
     ol {
-      @apply list-decimal;
+      list-style: decimal;
     }
 
     th,
     td {
-      @apply px-2;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
     }
 
     blockquote {
-      @apply border-l-black dark:border-l-white border-l-2 pl-4;
+      border-left: 2px solid black;
+      padding-left: 1rem;
     }
 
     summary {
@@ -136,16 +181,32 @@ const { title, tags, category } = Astro.props;
       margin-top: 0;
     }
 
-    @media (prefers-color-scheme: dark) {
-      .remark-mermaid-neutral {
-        display: none;
-      }
+    .remark-mermaid-dark {
+      display: none;
     }
 
-    @media not (prefers-color-scheme: dark) {
-      .remark-mermaid-dark {
-        display: none;
-      }
+    img {
+      max-width: 100%;
     }
+  }
+
+  :root {
+    --astro-code-color-text: #000000;
+    --astro-code-color-background: #ffffff;
+    --astro-code-token-constant: #005cc5;
+    --astro-code-token-string: #032f62;
+    --astro-code-token-comment: #6a737d;
+    --astro-code-token-keyword: #d73a49;
+    --astro-code-token-parameter: #24292e;
+    --astro-code-token-function: #6f42c1;
+    --astro-code-token-string-expression: #032f62;
+    --astro-code-token-punctuation: #032f62;
+    --astro-code-token-link: #032f62;
+  }
+
+  a {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
   }
 </style>

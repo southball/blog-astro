@@ -2,26 +2,117 @@
 import Hamburger from "./Hamburger.astro";
 ---
 
-<div class="max-w-[800px] mx-auto px-4 flex gap-2 my-2 items-center">
-  <img class="h-6" src="/icon.png" />
-  <a class="font-bold" href="/">South's Blog</a>
-  <a class="text-blue-600 dark:text-blue-300 hidden min-[400px]:inline" href="/"
-    >Home</a
-  >
-  <a
-    class="text-blue-600 dark:text-blue-300 hidden min-[400px]:inline"
-    href="https://southball.dev">About Me</a
-  >
-  <a
-    class="text-blue-600 dark:text-blue-300 hidden min-[400px]:inline"
-    href="/categories">Categories</a
-  >
-  <a
-    class="text-blue-600 dark:text-blue-300 hidden min-[400px]:inline"
-    href="/tags">Tags</a
-  >
-  <div class="grow"></div>
-  <div class="hidden max-[400px]:inline basis-6 dark:fill-white">
-    <a href="/nav"><Hamburger /></a>
+<div class="navbar-container">
+  <div class="navbar">
+    <div class="navbar__section navbar__section-site-title">
+      <img class="navbar__icon" src="/icon.png" />
+      <a class="navbar__title" class="font-bold" href="/">South's Blog</a>
+    </div>
+    <div class="navbar__section navbar__section-links">
+      <div class="navbar__links">
+        <a class="navabr__links__item" href="/">Home</a>
+        <a class="navabr__links__item" href="https://southball.dev">About Me</a>
+        <a class="navabr__links__item" href="/categories">Categories</a>
+        <a class="navabr__links__item" href="/tags">Tags</a>
+      </div>
+    </div>
+    <div class="navbar__section navbar__section-menu">
+      <div class="navbar__menu">
+        <Hamburger />
+      </div>
+    </div>
   </div>
+
+  <div class="navbar-container__underline" />
 </div>
+
+<style lang="scss">
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+    line-height: 0;
+  }
+
+  .navbar a {
+    text-decoration: none;
+    line-height: normal;
+    color: var(--link-color);
+  }
+
+  .navbar__section {
+    display: flex;
+  }
+
+  .navbar__section-site-title {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .navbar__section-menu {
+    display: none;
+  }
+
+  .navbar__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .navbar__menu {
+    width: 1.5rem;
+    cursor: pointer;
+  }
+
+  .navbar__links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  @media (max-width: 512px) {
+    .navbar__section-links {
+      display: none;
+    }
+
+    .navbar__section-menu {
+      display: inline-block;
+    }
+
+    .navbar_open-mobile {
+      display: grid;
+      grid-template-rows: auto auto;
+      row-gap: 0.5rem;
+
+      .navbar__section-site-title {
+        grid-row: 1;
+      }
+
+      .navbar__section-menu {
+        grid-row: 1;
+      }
+
+      .navbar__section-links {
+        display: flex;
+        grid-row: 2;
+      }
+
+      .navbar__links {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+  }
+
+  .navbar-container__underline {
+    display: block;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 1rem;
+  }
+</style>
+
+<script>
+  document.querySelector(".navbar__menu")?.addEventListener("click", () => {
+    document
+      .querySelector(".navbar")
+      ?.classList?.toggle?.("navbar_open-mobile");
+  });
+</script>

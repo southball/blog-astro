@@ -10,19 +10,19 @@ const tags = Object.entries(
     .reduce((acc, tag) => {
       acc[tag] = (acc[tag] ?? 0) + 1;
       return acc;
-    }, {})
+    }, {} as Record<string, number>)
 );
 ---
 
 <PageLayout title="Categories">
   <Container>
-    <h1 class="text-2xl mb-2">Tags</h1>
+    <h1>Tags</h1>
 
-    <ul class="list-disc ml-4">
+    <ul>
       {
         tags.map(([tag, frequency]) => (
           <li>
-            <a class="underline underline-offset-4" href={`/tag/${tag}`}>
+            <a href={`/tag/${tag}`}>
               {tag} ({frequency})
             </a>
           </li>

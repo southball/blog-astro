@@ -9,10 +9,7 @@ export interface Props {
 const { title } = Astro.props;
 ---
 
+<Navbar />
 <BaseLayout title={title}>
-  <Navbar />
-
-  <div class="pb-2"></div>
-
   <slot />
 </BaseLayout>

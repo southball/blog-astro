@@ -19,9 +19,9 @@ const posts = await getCollection("posts").then((posts) =>
 
 <PageLayout title={`Tag: ${tag}`}>
   <Container>
-    <div class="text-2xl mb-2">
-      Posts with tag <span class="font-bold">{tag}</span>
-    </div>
+    <h2>
+      Posts with tag <b>{tag}</b>
+    </h2>
     <PostPreviewList posts={posts} />
   </Container>
 </PageLayout>

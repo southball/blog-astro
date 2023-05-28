@@ -10,22 +10,19 @@ const categories = Object.entries(
     .reduce((acc, category) => {
       acc[category] = (acc[category] ?? 0) + 1;
       return acc;
-    }, {})
+    }, {} as Record<string, number>)
 );
 ---
 
 <PageLayout title="Categories">
   <Container>
-    <h1 class="text-2xl mb-2">Categories</h1>
+    <h1>Categories</h1>
 
-    <ul class="list-disc ml-4">
+    <ul>
       {
         categories.map(([category, frequency]) => (
           <li>
-            <a
-              class="underline underline-offset-4"
-              href={`/category/${category}`}
-            >
+            <a href={`/category/${category}`}>
               {category} ({frequency})
             </a>
           </li>

@@ -12,10 +12,23 @@ const { posts } = Astro.props;
 
 <div>
   {
-    posts.map((post, index) => (
-      <div class="mb-2 max-[400px]:mb-4">
+    posts.map((post, _index) => (
+      <div class="post-preview-container">
         <PostPreview post={post} />
       </div>
     ))
   }
 </div>
+
+<style>
+  .post-preview-container {
+    margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 512px) {
+    .post-preview-container {
+      margin-bottom: 1rem;
+    }
+  }
+</style>
+

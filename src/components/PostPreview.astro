@@ -13,19 +13,36 @@ const {
 } = Astro.props.post;
 ---
 
-<article>
+<article class="post-preview">
   {
     icon ? (
-      <Icon class="h-4 inline" name={icon} />
+      <Icon class="post-preview__icon" name={icon} />
     ) : external ? (
-      <Icon class="h-4 inline" name="ph:globe" />
+      <Icon class="post-preview__icon" name="ph:globe" />
     ) : (
-      <Icon class="h-4 inline" name="ph:pen-nib" />
+      <Icon class="post-preview__icon" name="ph:pen-nib" />
     )
   }
   <a
-    class="underline underline-offset-4 leading-none"
+    class="post-preview__title"
     href={external ?? `/posts/${id.replace(/\.md$/, "")}`}>{title}</a
   >
-  <span class="text-xs">{format(new Date(published), "yyyy-MM-dd")}</span>
+  <span class="post-preview__date">{format(new Date(published), "yyyy-MM-dd")}</span>
 </article>
+
+<style>
+  .post-preview__icon {
+    width: 1rem;
+  }
+
+  .post-preview__title {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    line-height: 1;
+    color: var(--link-color);
+  }
+
+  .post-preview__date {
+    font-size: 0.75rem;
+  }
+</style>

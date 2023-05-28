@@ -6,7 +6,7 @@ tags: [kubernetes]
 icon: "mdi:kubernetes"
 ---
 
-## Creating Kubernetes Cluster
+# Creating Kubernetes Cluster
 
 First, a Kubernetes cluster with 2 nodes is created using `k3s`. Each node is given 4 CPU cores (with 1 CPU limit) and 8 GB of memory.
 
@@ -22,7 +22,7 @@ Disable `traefik` as it is not needed, following the instructions at <https://gi
 
 Follow <https://docs.k3s.io/cluster-access> to setup local access to the created Kubernetes cluster.
 
-## Installing Istio
+# Installing Istio
 
 Install [Istio](https://istio.io/) with [Helm](https://helm.sh/), using default settings[^istio-install].
 
@@ -37,7 +37,7 @@ helm install istio-ingress istio/gateway -n istio-ingress --wait
 kubectl label namespace default istio-injection=enabled --overwrite
 ```
 
-## Creating the default Istio gateway
+# Creating the default Istio gateway
 
 Create a default wildcard gateway so services exposed with the given gateway can be accessed from outside the cluster.
 
@@ -66,7 +66,7 @@ spec:
 
 </details>
 
-## Installing httpbin and Creating Virtual Service
+# Installing httpbin and Creating Virtual Service
 
 As the first service in the cluster, install [httpbin](https://httpbin.org) and create the corresponding virtual service so it can be accessed from outside the cluster.
 
@@ -146,7 +146,7 @@ spec:
 
 </details>
 
-## Installing Longhorn
+# Installing Longhorn
 
 Install [Longhorn](https://longhorn.io/docs/1.4.1/deploy/install/install-with-helm/) with Helm[^longhorn-helm]. Since there are only 2 nodes, set the default replica count to 2 in `values.yml`.
 
@@ -166,7 +166,7 @@ global:
 
 </details>
 
-## Setting up Promtail to Export All Logs
+# Setting up Promtail to Export All Logs
 
 Since there is a [Loki](https://grafana.com/oss/loki/) instance setup on another server, it would be easier to pipe all logs from Kubernetes to the Loki server.
 
@@ -188,7 +188,7 @@ config:
 
 </details>
 
-## Deploying HashiCorp Vault on Another Machine
+# Deploying HashiCorp Vault on Another Machine
 
 On another server, install [HashiCorp Vault](https://www.vaultproject.io/)[^vault-install]
 
@@ -219,7 +219,7 @@ listener "tcp" {
 
 Finally, access the UI at `http://<Vault address>:8200/ui`, setup the Vault and create a KV Secret Engine at `kv`[^kv-secret-engine].
 
-## Setting up External Secrets with HashiCorp Vault
+# Setting up External Secrets with HashiCorp Vault
 
 Using [External Secrets Operator](https://external-secrets.io/), it is possible to create secrets from [the KV Secrets Engine](https://developer.hashicorp.com/vault/docs/secrets/kv) in Vault. Install External Secrets Operator with Helm[^external-secrets-operator-helm], then create a SecretStore following the [example](https://external-secrets.io/v0.8.1/provider/hashicorp-vault/#example)[^external-secrets-operator-example].
 
@@ -265,7 +265,7 @@ spec:
 
 </details>
 
-## Deploying single-pod Minio Server
+# Deploying single-pod Minio Server
 
 In order to create a Minio server with non-default credentials, we need to provide the environment variables `MINIO_ROOT_USER` and `MINIO_ROOT_PASSWORD`.
 With external secrets set up, we can create an `ExternalSecret` that maps to a normal Kubernetes `Secret`, and use the `Secret` to populate the environment variables.
@@ -410,7 +410,7 @@ spec:
 
 </details>
 
-## Todos
+# Todos
 
 - Enable TLS for Vault and ensure Kubernetes can connect to Vault
 - Installing in-cluster Prometheus and [Kiali](https://kiali.io/) for visualization of Istio

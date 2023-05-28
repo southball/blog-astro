@@ -6,7 +6,7 @@ tags: [proxmox, cloud-init]
 icon: "simple-icons:proxmox"
 ---
 
-## About Proxmox
+# About Proxmox
 
 > Proxmox VE is a complete open-source platform for enterprise virtualization. With the built-in web interface you can easily manage VMs and containers, software-defined storage and networking, high-availability clustering, and multiple out-of-the-box tools on a single solution. [^proxmox]
 
@@ -14,13 +14,13 @@ I have been using [Proxmox](https://www.proxmox.com/en/) as the virtualization s
 
 ![Screenshot of Proxmox](/assets/20230527-proxmox-cloud-init/proxmox.png)
 
-## About cloud-init
+# About cloud-init
 
 > Cloud-init is the industry standard multi-distribution method for cross-platform cloud instance initialisation. It is supported across all major public cloud providers, provisioning systems for private cloud infrastructure, and bare-metal installations. [^cloud-init]
 
 Using cloud-init, it is possible to create users, configure networking, set SSH key, etc. As the number of virtual machine grows, it becomes more and more annoying to configure each virtual machine manually. Cloud-init provides a solution to the problem, by providing a standard solution for initializing VM instances. Proxmox supports cloud-init, so in this article I will discuss how it can be used.
 
-## Using cloud-init with Proxmox
+# Using cloud-init with Proxmox
 
 First of all, prepare an instance with the desired operating system normally. It is recommended to start with a small disk size like 8 GB, since it can be expanded later easily, and transferring the disk when performing live migration requires transferring the whole disk, regardless of how much disk space is actually used.
 
@@ -30,7 +30,7 @@ After that, run the following command:
 cloud-init clean --logs --machine-id
 ```
 
-## Expanding the hard drive after cloning
+# Expanding the hard drive after cloning
 
 1. Resize the disk from Proxmox web interface.
 2. Login to the instance.
