@@ -1,11 +1,12 @@
 ---
+import { getCollection } from "astro:content";
 import Container from "../components/Container.astro";
 import PageLayout from "../layouts/PageLayout.astro";
 
-const posts = await Astro.glob("./posts/*.md");
+const posts = await getCollection("posts");
 const tags = Object.entries(
   posts
-    .flatMap((post) => post.frontmatter.tags ?? [])
+    .flatMap((post) => post.data.tags ?? [])
     .reduce((acc, tag) => {
       acc[tag] = (acc[tag] ?? 0) + 1;
       return acc;

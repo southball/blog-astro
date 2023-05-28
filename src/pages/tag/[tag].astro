@@ -2,17 +2,18 @@
 import PageLayout from "../../layouts/PageLayout.astro";
 import Container from "../../components/Container.astro";
 import PostPreviewList from "../../components/PostPreviewList.astro";
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await Astro.glob("../posts/*.md");
+  const posts = await getCollection("posts");
   return posts
-    .flatMap((post) => post.frontmatter.tags ?? [])
+    .flatMap((post) => post.data.tags ?? [])
     .map((tag) => ({ params: { tag } }));
 }
 
 const { tag } = Astro.params;
-const posts = await Astro.glob("../posts/*.md").then((posts) =>
-  posts.filter((post) => (post.frontmatter.tags ?? []).includes(tag))
+const posts = await getCollection("posts").then((posts) =>
+  posts.filter((post) => !tag || post.data.tags.includes(tag))
 );
 ---
 

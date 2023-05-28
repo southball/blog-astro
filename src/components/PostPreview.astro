@@ -1,15 +1,15 @@
 ---
-import type { MarkdownInstance } from "astro";
 import { format } from "date-fns";
 import { Icon } from "astro-icon";
+import type { CollectionEntry } from "astro:content";
 
 export interface Props {
-  post: MarkdownInstance<any>;
+  post: CollectionEntry<"posts">;
 }
 
 const {
-  url,
-  frontmatter: { title, published, external, icon },
+  id,
+  data: { title, published, external, icon },
 } = Astro.props.post;
 ---
 
@@ -23,8 +23,9 @@ const {
       <Icon class="h-4 inline" name="ph:pen-nib" />
     )
   }
-  <a class="underline underline-offset-4 leading-none" href={external ?? url}
-    >{title}</a
+  <a
+    class="underline underline-offset-4 leading-none"
+    href={external ?? `/posts/${id.replace(/\.md$/, "")}`}>{title}</a
   >
   <span class="text-xs">{format(new Date(published), "yyyy-MM-dd")}</span>
 </article>

@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
 title: "Introduction to interactive Git rebase"
 published: 2023-05-28
 category: programming

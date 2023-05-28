@@ -6,9 +6,11 @@ import { Icon } from "astro-icon";
 
 export interface Props {
   title: string;
+  tags: string[];
+  category?: string;
 }
 
-const { title, tags, category } = Astro.props.frontmatter;
+const { title, tags, category } = Astro.props;
 ---
 
 <BaseLayout title={title}>

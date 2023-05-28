@@ -1,25 +1,26 @@
 ---
+import { getCollection } from "astro:content";
 import Container from "../../components/Container.astro";
 import PostPreviewList from "../../components/PostPreviewList.astro";
 import PageLayout from "../../layouts/PageLayout.astro";
 
 export async function getStaticPaths() {
-  const posts = await Astro.glob("../posts/*.md");
+  const posts = await getCollection("posts");
   return [
     { params: { category: "uncategorized" } },
     ...posts
-      .map((post) => post.frontmatter.category)
+      .map((post) => post.data.category)
       .filter((category) => category)
       .map((category) => ({ params: { category } })),
   ];
 }
 
 const { category } = Astro.params;
-const posts = await Astro.glob("../posts/*.md").then((posts) =>
+const posts = await getCollection("posts").then((posts) =>
   posts.filter(
     (post) =>
-      post.frontmatter.category === category ||
-      (category === "uncategorized" && !post.frontmatter.category)
+      post.data.category === category ||
+      (category === "uncategorized" && !post.data.category)
   )
 );
 ---

@@ -1,16 +1,17 @@
 ---
+import { getCollection, getEntry } from "astro:content";
 import PageLayout from "../layouts/PageLayout.astro";
 import Container from "../components/Container.astro";
 import PostPreviewList from "../components/PostPreviewList.astro";
 
-const posts = await Astro.glob("./posts/*.md").then((posts) =>
+const posts = await getCollection("posts").then((posts) =>
   posts
-  .filter((post) => import.meta.env.DEV || post.frontmatter.draft !== true)
-  .sort(
-    (post1, post2) =>
-      new Date(post2.frontmatter.published).getTime() -
-      new Date(post1.frontmatter.published).getTime()
-  )
+    .filter((post) => import.meta.env.DEV || post.data.draft !== true)
+    .sort(
+      (post1, post2) =>
+        new Date(post2.data.published).getTime() -
+        new Date(post1.data.published).getTime()
+    )
 );
 ---
 

@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
 title: Hello, World!
 published: 2023-01-09
 tags: [hello-world]

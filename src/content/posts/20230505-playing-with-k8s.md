@@ -1,8 +1,7 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
 title: "Playing with Kubernetes (1)"
 published: 2023-05-05
-category: kubernetes
+category: infra
 tags: [kubernetes]
 icon: "mdi:kubernetes"
 ---
