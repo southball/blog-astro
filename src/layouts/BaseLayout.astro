@@ -20,14 +20,13 @@ const { title } = Astro.props;
 	</body>
 </html>
 
-<style>
-	.body {
+<style is:global>
+	body {
 		margin: 0;
 		background-color: #ffffff;
+		font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
 	}
-</style>
 
-<style is:global>
 	:root {
 		--link-color: #000cb0;
 
