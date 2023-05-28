@@ -4,7 +4,6 @@ published: 2023-05-28
 category: programming
 tags: [git]
 icon: "mdi:git"
-draft: true
 ---
 
 # Why this article?
@@ -14,6 +13,22 @@ There may be many good articles about Git rebase, but I failed to find one that 
 # Forenote
 
 I am not 100% sure that all information is accurate. This article is mostly based on how I commonly use this feature of Git, and I try to ensure that the information accurate, but there are no guarantees.
+
+# Features branches
+
+This introduction assumes the use of feature braanches, where force-push is acceptable.
+
+To update a local feature branch that has been affected by force-push, try
+
+```sh
+$ git pull --rebase origin $BRANCH
+```
+
+If it is alright to discard local changes on the branch, try
+
+```sh
+$ git reset --hard origin/$BRANCH
+```
 
 # What is Git rebase?
 
@@ -173,3 +188,109 @@ gitGraph
 `git checkout feature` followed by `git rebase main` should do most of the time.
 
 ## Catching up with the main branch (with stacked PRs)
+
+```mermaid
+gitGraph
+  commit id: "0000001"
+  commit id: "0000002"
+  branch develop-1
+  checkout develop-1
+  commit id: "0000003"
+  commit id: "0000004"
+  commit id: "0000005"
+  branch develop-2
+  commit id: "0000006"
+  commit id: "0000007"
+  checkout main
+  commit id: "0000008"
+  commit id: "0000009"
+```
+
+The following instructions should update all branch
+
+```sh
+$ git checkout main
+$ git checkout develop-1
+$ git rebase -
+$ git checkout develop-2
+$ git rebase -
+```
+
+The final result will be as follows:
+
+```mermaid
+gitGraph
+  commit id: "0000001"
+  commit id: "0000002"
+  commit id: "0000008"
+  commit id: "0000009"
+  branch develop-1
+  checkout develop-1
+  commit id: "0000003"
+  commit id: "0000004"
+  commit id: "0000005"
+  branch develop-2
+  checkout develop-2
+  commit id: "0000006"
+  commit id: "0000007"
+```
+
+## Updating stacked PRs with changed commits
+
+Here commit `1000004` is the changed version of commit `0000004`. `0000005-1` and `0000005-2` are the same commits.
+
+```mermaid
+gitGraph
+  commit id: "0000001"
+  commit id: "0000002"
+  branch develop-1
+  checkout develop-1
+  commit id: "0000003"
+  branch develop-2
+  checkout develop-1
+  commit id: "1000004"
+  commit id: "0000005-1"
+  checkout develop-2
+  commit id: "0000004"
+  commit id: "0000005-2"
+  commit id: "0000006"
+  commit id: "0000007"
+  checkout main
+  commit id: "0000008"
+  commit id: "0000009"
+```
+
+Run the commands as follows:
+
+```sh
+$ git checkout main
+$ git checkout develop-1
+$ git rebase main
+$ git checkout develop-2
+$ git rebase -i develop-1
+
+drop 0000004 Commit 4, revision 1
+drop 0000005-2 Commit 5
+pick 0000006 Commit 6
+pick 0000007 Commit 7
+```
+
+The result will be as follows:
+
+```mermaid
+gitGraph
+  commit id: "0000001"
+  commit id: "0000002"
+  commit id: "0000008"
+  commit id: "0000009"
+  branch develop-1
+  checkout develop-1
+  commit id: "0000003"
+  commit id: "1000004"
+  commit id: "0000005-1"
+  branch develop-2
+  checkout develop-2
+  commit id: "0000006"
+  commit id: "0000007"
+  checkout main
+```
