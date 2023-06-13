@@ -35,7 +35,7 @@ const { title, tags, category, icon } = Astro.props;
           <Icon class="blog-post__section-icon" name="mdi:tag-multiple" />
           {/* This part cannot be formatted */}
           {tags.map((tag: string, index: number) => (
-            <span>{index !== 0 ? ", " : ""}</span>
+            <span>{index !== 0 && <>,&nbsp;</> }</span>
             <a class="blog-post__tag" href={`/tag/${tag}`}>{tag}</a>
           ))}
         </div>
@@ -185,6 +185,16 @@ const { title, tags, category, icon } = Astro.props;
       display: none;
     }
 
+    @media (prefers-color-scheme: dark) {
+      .remark-mermaid-dark {
+        display: block;
+      }
+
+      .remark-mermaid-neutral {
+        display: none;
+      }
+    }
+
     .remark-mermaid > svg,
     img {
       max-width: 100%;
@@ -193,7 +203,7 @@ const { title, tags, category, icon } = Astro.props;
 
   :root {
     --astro-code-color-text: #000000;
-    --astro-code-color-background: #ffffff;
+    --astro-code-color-background: transparent;
     --astro-code-token-constant: #005cc5;
     --astro-code-token-string: #032f62;
     --astro-code-token-comment: #6a737d;
@@ -205,9 +215,41 @@ const { title, tags, category, icon } = Astro.props;
     --astro-code-token-link: #032f62;
   }
 
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --astro-code-color-text: #d4d4d4;
+      --astro-code-color-background: transparent;
+      --astro-code-token-constant: #9cdcfe;
+      --astro-code-token-string: #ce9178;
+      --astro-code-token-comment: #6a9955;
+      --astro-code-token-keyword: #569cd6;
+      --astro-code-token-parameter: #9cdcfe;
+      --astro-code-token-function: #dcdcaa;
+      --astro-code-token-string-expression: #ce9178;
+      --astro-code-token-punctuation: #d4d4d4;
+      --astro-code-token-link: #9cdcfe;
+    }
+  }
+
   a {
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-all;
+    color: var(--link-color);
+  }
+
+  span.icon-link > svg {
+    width: 1rem;
+    color: #dcdcdc;
+    margin-left: -1.25rem;
+    margin-right: 0.25rem;
+
+    @media (prefers-color-scheme: dark) {
+      color: #444444;
+    }
+
+    &:hover {
+      color: var(--text-color);
+    }
   }
 </style>

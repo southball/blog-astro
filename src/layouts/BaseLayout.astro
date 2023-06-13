@@ -21,14 +21,10 @@ const { title } = Astro.props;
 </html>
 
 <style is:global>
-	body {
-		margin: 0;
-		background-color: #ffffff;
-		font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
-	}
-
 	:root {
+		--background-color: #ffffff;
 		--link-color: #000cb0;
+		--text-color: #000000;
 
 		--font-size-h1: 1.875rem;
 		--font-size-h2: 1.5rem;
@@ -45,6 +41,25 @@ const { title } = Astro.props;
 		--line-height-h5: 1.25rem;
 		--line-height-h6: 1rem;
 		--line-height-h7: 0.875rem;
+	}
+	
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--background-color: #202020;
+			--link-color: #6ea8fe;
+			--text-color: #ffffff;
+		}
+	}
+
+	a {
+		color: var(--link-color);
+	}
+
+	body {
+		margin: 0;
+		background-color: var(--background-color);
+		color: var(--text-color);
+		font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
 	}
 
 	h1 {
