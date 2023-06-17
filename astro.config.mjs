@@ -6,11 +6,6 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings/lib";
 import rehypeSlug from "rehype-slug";
 
 export default defineConfig({
-  vite: {
-    ssr: {
-      external: ["which", "jsdom", "json5"],
-    },
-  },
   markdown: {
     remarkPlugins: [
       [remarkMermaid, { themes: ["dark", "neutral"] }],

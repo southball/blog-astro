@@ -13,8 +13,8 @@
   "dependencies": {
     "@mdi/svg": "^7.1.96",
     "@mermaid-js/mermaid-cli": "^9.3.0",
-    "@southball/remark-code-block-collapse": "^0.1.2",
-    "@southball/remark-mermaid": "^0.3.1",
+    "@southball/remark-code-block-collapse": "^0.2.1",
+    "@southball/remark-mermaid": "^0.4.0",
     "astro": "^2.5.5",
     "astro-icon": "^0.8.0",
     "date-fns": "^2.29.3",
@@ -23,9 +23,6 @@
     "remark-toc": "^8.0.1"
   },
   "devDependencies": {
-    "jsdom": "^22.1.0",
-    "json5": "^2.2.3",
-    "sass": "^1.57.1",
-    "which": "^3.0.1"
+    "sass": "^1.57.1"
   }
 }
