@@ -27,13 +27,15 @@ const {
     class="post-preview__title"
     href={external ?? `/posts/${id.replace(/\.md$/, "")}`}>{title}</a
   >
-  <span class="post-preview__date">{format(new Date(published), "yyyy-MM-dd")}</span>
+  <span class="post-preview__date"
+    >{format(new Date(published), "yyyy-MM-dd")}</span
+  >
 </article>
 
-<style>
+<style is:inline>
   .post-preview__icon {
     width: 1rem;
-    margin: -.25rem 0;
+    margin: -0.25rem 0;
   }
 
   .post-preview__title {
