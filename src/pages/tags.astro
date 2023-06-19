@@ -11,6 +11,8 @@ const tags = Object.entries(
       acc[tag] = (acc[tag] ?? 0) + 1;
       return acc;
     }, {} as Record<string, number>)
+).sort(([tag1, _frequency1], [tag2, _frequency2]) =>
+  tag1.localeCompare(tag2, "ja")
 );
 ---
 

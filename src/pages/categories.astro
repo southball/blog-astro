@@ -11,6 +11,8 @@ const categories = Object.entries(
       acc[category] = (acc[category] ?? 0) + 1;
       return acc;
     }, {} as Record<string, number>)
+).sort(([category1, _frequency1], [category2, _frequency2]) =>
+  category1.localeCompare(category2, "ja")
 );
 ---
 
