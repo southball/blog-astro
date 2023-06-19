@@ -12,7 +12,7 @@ icon: "simple-icons:proxmox"
 
 I have been using [Proxmox](https://www.proxmox.com/en/) as the virtualization solution for managing my servers. Proxmox provide a convenient web interface, which allow convenient access to powerful features like [KVM live migration](https://www.linux-kvm.org/page/Migration).
 
-![Screenshot of Proxmox](/assets/20230527-proxmox-cloud-init/proxmox.png)
+![Screenshot of Proxmox](../../assets/20230527-proxmox-cloud-init/proxmox.png)
 
 # About cloud-init
 

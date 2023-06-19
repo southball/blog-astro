@@ -4,8 +4,12 @@ import remarkCodeBlockCollapse from "@southball/remark-code-block-collapse";
 import remarkToc from "remark-toc";
 import rehypeAutolinkHeadings from "rehype-autolink-headings/lib";
 import rehypeSlug from "rehype-slug";
+import compress from "astro-compress";
 
 export default defineConfig({
+  build: {
+    inlineStylesheets: "always",
+  },
   markdown: {
     remarkPlugins: [
       [remarkMermaid, { themes: ["dark", "neutral"] }],
@@ -49,4 +53,8 @@ export default defineConfig({
       theme: "css-variables",
     },
   },
+  integrations: [compress()],
+  experimental: {
+    assets: true
+  }
 });

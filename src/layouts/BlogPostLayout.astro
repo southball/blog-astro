@@ -51,7 +51,7 @@ const { title, tags, category, icon } = Astro.props;
   </Container>
 </BaseLayout>
 
-<style lang="scss" is:global is:inline>
+<style lang="scss" is:global>
   .blog-post__title {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -198,6 +198,7 @@ const { title, tags, category, icon } = Astro.props;
     .remark-mermaid > svg,
     img {
       max-width: 100%;
+      height: auto;
     }
   }
 
