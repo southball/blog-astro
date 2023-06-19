@@ -113,10 +113,10 @@ import Hamburger from "./Hamburger.astro";
   }
 </style>
 
-<script>
-  document.querySelector(".navbar__menu")?.addEventListener("click", () => {
-    document
-      .querySelector(".navbar")
-      ?.classList?.toggle?.("navbar_open-mobile");
-  });
+<script is:inline>
+document.querySelector(".navbar__menu")?.addEventListener("click", () => {
+  document
+    .querySelector(".navbar")
+    ?.classList?.toggle?.("navbar_open-mobile");
+});
 </script>
