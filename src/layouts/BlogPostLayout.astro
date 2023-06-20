@@ -19,39 +19,68 @@ const { title, tags, category, icon } = Astro.props;
 
   <Container>
     <div class="blog-post">
-    <div class="blog-post__title">
-      {icon ? <Icon class="blog-post__title-icon" name={icon} /> : undefined}
-      {title}
-    </div>
-    <div class="blog-post__section-category">
-      <Icon class="blog-post__section-icon" name="mdi:hashtag" />
-      <a class="blog-post__category" href={`/category/${category ?? "uncategorized"}`}
-        >{category ?? "uncategorized"}</a
-      >
-    </div>
-    {
-      tags && tags.length > 0 && (
-        <div class="blog-post__section-tags">
-          <Icon class="blog-post__section-icon" name="mdi:tag-multiple" />
-          {/* This part cannot be formatted */}
-          {tags.map((tag: string, index: number) => (
-            <span>{index !== 0 && <>,&nbsp;</> }</span>
-            <a class="blog-post__tag" href={`/tag/${tag}`}>{tag}</a>
-          ))}
-        </div>
-      )
-    }
+      <div class="blog-post__title">
+        {icon ? <Icon class="blog-post__title-icon" name={icon} /> : undefined}
+        {title}
+      </div>
+      <div class="blog-post__section-category">
+        <Icon class="blog-post__section-icon" name="mdi:hashtag" />
+        <a class="blog-post__category" href={`/category/${category ?? "uncategorized"}`}
+          >{category ?? "uncategorized"}</a
+        >
+      </div>
+      {
+        tags && tags.length > 0 && (
+          <div class="blog-post__section-tags">
+            <Icon class="blog-post__section-icon" name="mdi:tag-multiple" />
+            {/* This part cannot be formatted */}
+            {tags.map((tag: string, index: number) => (
+              <span>{index !== 0 && <>,&nbsp;</> }</span>
+              <a class="blog-post__tag" href={`/tag/${tag}`}>{tag}</a>
+            ))}
+          </div>
+        )
+      }
+      <div class="blog-post__share-buttons">
+        <a class="twitter-share-button"
+          href="https://twitter.com/share"
+          data-text={title}
+          data-url={Astro.url.href}>
+          Tweet
+        </a>
+      </div>
 
-    <div class="blog-post__separator"></div>
+      <div class="blog-post__separator"></div>
 
-    <div class="blog-post__body">
-      <slot />
+      <div class="blog-post__body">
+        <slot />
+      </div>
+
+      <div class="blog-post__separator"></div>
+
+      <h1>Comments</h1>
+
+      <script
+        src="https://utteranc.es/client.js"
+        repo="southball/blog-comments"
+        issue-term="pathname"
+        label="comments"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+      </script>
     </div>
-  </div>
   </Container>
 </BaseLayout>
 
 <style lang="scss" is:global>
+  .blog-post__share-buttons {
+    /* Prevent layout shift */
+    height: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .blog-post__title {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -254,3 +283,23 @@ const { title, tags, category, icon } = Astro.props;
     }
   }
 </style>
+
+<!-- Twitter button script -->
+<script lang="js">
+window.twttr = (function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function (f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));
+</script>
