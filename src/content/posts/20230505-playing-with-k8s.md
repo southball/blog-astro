@@ -45,9 +45,7 @@ Create a default wildcard gateway so services exposed with the given gateway can
 kubectl apply -f gateway.yml
 ```
 
-<details><summary><code>gateway.yml</code></summary>
-
-```yml
+```yml {fold:{summary:"<code>gateway.yml</code>"}}
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
@@ -64,8 +62,6 @@ spec:
         - "*"
 ```
 
-</details>
-
 # Installing httpbin and Creating Virtual Service
 
 As the first service in the cluster, install [httpbin](https://httpbin.org) and create the corresponding virtual service so it can be accessed from outside the cluster.
@@ -76,9 +72,7 @@ kubectl apply -f httpbin/service.yml
 kubectl apply -f httpbin/virtual-service.yml
 ```
 
-<details><summary><code>httpbin/deployment.yml</code></summary>
-
-```yml
+```yml {fold:{summary:"<code>httpbin/deployment.yml</code>"}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -102,11 +96,7 @@ spec:
             - containerPort: 80
 ```
 
-</details>
-
-<details><summary><code>httpbin/service.yml</code></summary>
-
-```yml
+```yml {fold:{summary:"<code>httpbin/service.yml</code>"}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -123,11 +113,7 @@ spec:
       targetPort: 80
 ```
 
-</details>
-
-<details><summary><code>httpbin/virtual-service.yml</code></summary>
-
-```yml
+```yml {fold:{summary:"<code>httpbin/virtual-service.yml</code>"}}
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
@@ -144,8 +130,6 @@ spec:
             host: httpbin.default.svc.cluster.local
 ```
 
-</details>
-
 # Installing Longhorn
 
 Install [Longhorn](https://longhorn.io/docs/1.4.1/deploy/install/install-with-helm/) with Helm[^longhorn-helm]. Since there are only 2 nodes, set the default replica count to 2 in `values.yml`.
@@ -156,15 +140,11 @@ helm repo update
 helm install longhorn longhorn/longhorn --namespace longhorn-system --create-namespace --values longtail/values.yml --version 1.4.1
 ```
 
-<details><summary><code>longtail/values.yml</code></summary>
-
-```yml
+```yml {fold:{summary:"<code>longtail/values.yml</code>"}}
 global:
   persistence:
     defaultClassReplicaCount: 2
 ```
-
-</details>
 
 # Setting up Promtail to Export All Logs
 
@@ -178,15 +158,11 @@ helm repo update
 helm install --namespace monitoring --values promtail/values.yml promtail grafana/promtail
 ```
 
-<details><summary><code>promtail/values.yml</code></summary>
-
-```yml
+```yml {fold:{summary:"<code>promtail/values.yml</code>"}}
 config:
   clients:
     - url: http://<Loki address>/loki/api/v1/push
 ```
-
-</details>
 
 # Deploying HashiCorp Vault on Another Machine
 
@@ -200,7 +176,7 @@ sudo apt update && sudo apt install vault
 
 Then edit `/etc/vault.d/vault.hcl`, and restart with `sudo systemctl restart vault`. Note that TLS is disabled here.
 
-<details><summary><code>vault.hcl</code></summary>
+````yml {fold:{summary:"<code>vault.hcl</code>"}}
 
 ```hcl
 ui = true
@@ -213,9 +189,7 @@ listener "tcp" {
   address = "0.0.0.0:8200"
   tls_disable = 1
 }
-```
-
-</details>
+````
 
 Finally, access the UI at `http://<Vault address>:8200/ui`, setup the Vault and create a KV Secret Engine at `kv`[^kv-secret-engine].
 
@@ -231,9 +205,7 @@ kubectl apply -f external-secrets/token.yml
 kubectl apply -f external-secrets/secret-store.yml
 ```
 
-<details><summary><code>external-secrets/token.yml</code></summary>
-
-```yaml
+```yml {fold:{summary:"<code>external-secrets/token.yml</code>"}}
 apiVersion: v1
 kind: Secret
 metadata:
@@ -242,11 +214,7 @@ data:
   token: "<token in base64 here>"
 ```
 
-</details>
-
-<details><summary><code>external-secrets/secret-store.yml</code></summary>
-
-```yaml
+```yml {fold:{summary:"<code>external-secrets/secret-store.yml</code>"}}
 apiVersion: external-secrets.io/v1beta1
 kind: SecretStore
 metadata:
@@ -263,8 +231,6 @@ spec:
           key: token
 ```
 
-</details>
-
 # Deploying single-pod Minio Server
 
 In order to create a Minio server with non-default credentials, we need to provide the environment variables `MINIO_ROOT_USER` and `MINIO_ROOT_PASSWORD`.
@@ -278,9 +244,7 @@ kubectl apply -f minio/service.yml
 kubectl apply -f minio/virtual-service.yml
 ```
 
-<details><summary><code>minio/external-secret.yml</code></summary>
-
-```yml
+```yml {fold:{summary:"<code>minio/external-secret.yml</code>"}}
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
@@ -303,11 +267,7 @@ spec:
         property: password
 ```
 
-</details>
-
-<details><summary><code>minio/stateful-set.yml</code></summary>
-
-```yml
+```yml {fold:{summary:"<code>minio/stateful-set.yml</code>"}}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -347,11 +307,7 @@ spec:
             storage: 20Gi
 ```
 
-</details>
-
-<details><summary><code>minio/service.yml</code></summary>
-
-```yml
+```yml {fold:{summary:"<code>minio/service.yml</code>"}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -368,11 +324,7 @@ spec:
       targetPort: 9001
 ```
 
-</details>
-
-<details><summary><code>minio/virtual-service.yml</code></summary>
-
-```yml
+```yml {fold:{summary:"<code>minio/virtual-service.yml</code>"}}
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
@@ -407,8 +359,6 @@ spec:
             port:
               number: 9000
 ```
-
-</details>
 
 # Todos
 
