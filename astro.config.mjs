@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import remarkMermaid from "@southball/remark-mermaid";
 import remarkCodeBlockCollapse from "@southball/remark-code-block-collapse";
 import remarkToc from "remark-toc";
-import rehypeAutolinkHeadings from "rehype-autolink-headings/lib";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import compress from "astro-compress";
 
@@ -54,7 +54,4 @@ export default defineConfig({
     },
   },
   integrations: [compress()],
-  experimental: {
-    assets: true
-  }
 });

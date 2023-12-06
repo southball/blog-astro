@@ -8,22 +8,25 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "upgrade-interactive": "npm-check --update"
   },
   "dependencies": {
     "@mdi/svg": "^7.1.96",
     "@mermaid-js/mermaid-cli": "^9.3.0",
     "@southball/remark-code-block-collapse": "^0.3.0",
     "@southball/remark-mermaid": "^0.5.0",
-    "astro": "^2.5.5",
-    "astro-compress": "^1.1.47",
+    "astro": "^4.0.2",
+    "astro-compress": "^2.2.3",
     "astro-icon": "^0.8.0",
     "date-fns": "^2.29.3",
-    "rehype-autolink-headings": "^6.1.1",
-    "rehype-slug": "^5.1.0",
-    "remark-toc": "^8.0.1"
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
+    "remark-toc": "^9.0.0"
   },
   "devDependencies": {
-    "sass": "^1.57.1"
+    "npm-check": "^6.0.1",
+    "sass": "^1.57.1",
+    "svgo": "2.8.0"
   }
 }
