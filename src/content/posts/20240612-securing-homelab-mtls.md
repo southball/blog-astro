@@ -5,7 +5,7 @@ category: infra
 tags:
 - step-ca
 - homelab
-icon: "ph:flag-fill"
+icon: "mdi:encryption"
 ---
 
 I have servers (mainly mini PCs) at home, running some services. To access these servers everywhere, I usually use [Tailscale](https://tailscale.com/) to do so. However, on my phone, it is a bit annoying to do so, and it drains battery fast sometimes. Therefore, I have explored using mutual TLS (mTLS) to secure the access to these services.
