@@ -6,6 +6,8 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import compress from "astro-compress";
 
+import caddyfileGrammar from "./shiki/caddyfile.tmLanguage.json" assert { type: "json" };
+
 export default defineConfig({
   build: {
     inlineStylesheets: "always",
@@ -51,6 +53,14 @@ export default defineConfig({
     },
     shikiConfig: {
       theme: "css-variables",
+      langs: [
+        {
+          id: "caddy",
+          scopeName: "source.Caddyfile",
+          grammar: caddyfileGrammar,
+          aliases: ["caddyfile", "caddy"],
+        },
+      ],
     },
   },
   integrations: [compress()],

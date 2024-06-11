@@ -17,11 +17,17 @@ export async function getStaticPaths() {
 
 const { category } = Astro.params;
 const posts = await getCollection("posts").then((posts) =>
-  posts.filter(
-    (post) =>
-      post.data.category === category ||
-      (category === "uncategorized" && !post.data.category)
-  )
+  posts
+    .filter(
+      (post) =>
+        post.data.category === category ||
+        (category === "uncategorized" && !post.data.category)
+    )
+    .sort(
+      (post1, post2) =>
+        new Date(post2.data.published).getTime() -
+        new Date(post1.data.published).getTime()
+    )
 );
 ---
 
