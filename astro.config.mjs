@@ -1,10 +1,10 @@
 import { defineConfig } from "astro/config";
-import remarkMermaid from "@southball/remark-mermaid";
 import remarkCodeBlockCollapse from "@southball/remark-code-block-collapse";
 import remarkToc from "remark-toc";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import compress from "astro-compress";
+import icon from "astro-icon";
 
 import caddyfileGrammar from "./shiki/caddyfile.tmLanguage.json" assert { type: "json" };
 
@@ -14,7 +14,6 @@ export default defineConfig({
   },
   markdown: {
     remarkPlugins: [
-      [remarkMermaid, { themes: ["dark", "neutral"] }],
       remarkCodeBlockCollapse,
       [remarkToc, { ordered: true, tight: true }],
     ],
@@ -63,5 +62,5 @@ export default defineConfig({
       ],
     },
   },
-  integrations: [compress()],
+  integrations: [compress(), icon()],
 });

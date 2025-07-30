@@ -24,3 +24,5 @@ pnpm-debug.log*
 
 # Astro
 .astro
+
+.pnpm-store
