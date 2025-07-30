@@ -6,6 +6,8 @@ tags: [git]
 icon: "mdi:git"
 ---
 
+(2025-07-30 update: [`mmdc`](https://github.com/mermaid-js/mermaid-cli) is broken on my PC, and I can't be bothered to fix it yet. I'll probably replace this with something that does not require headless Chrome.)
+
 # Why this article?
 
 There may be many good articles about Git rebase, but I failed to find one that covers everything I want it to. Plus I need a draft for the Japanese version of this article, so here it is.
