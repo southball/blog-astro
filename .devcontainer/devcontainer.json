@@ -21,8 +21,9 @@
     {
       "source": "${localEnv:HOME}/.claude",
       "target": "/home/vscode/.claude",
-      "type": "bind"
-    }
+      "type": "bind",
+    },
+    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,readonly",
   ],
   "containerEnv": {},
   "remoteEnv": {}
