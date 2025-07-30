@@ -1,0 +1,7 @@
+[tools]
+node = "22.17.1"
+pnpm = "10.13.1"
+
+[tasks]
+"install-chrome" = "pnpm dlx puppeteer@23 browsers install"
+"dev" = "pnpm run dev --host 0.0.0.0"
