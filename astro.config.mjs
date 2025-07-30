@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, passthroughImageService } from "astro/config";
 import remarkCodeBlockCollapse from "@southball/remark-code-block-collapse";
 import remarkToc from "remark-toc";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -61,6 +61,9 @@ export default defineConfig({
         },
       ],
     },
+  },
+  image: {
+    service: passthroughImageService(),
   },
   integrations: [compress(), icon()],
 });
