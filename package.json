@@ -12,7 +12,7 @@
     "upgrade-interactive": "npm-check --update"
   },
   "dependencies": {
-    "@iconify-json/eos-icons": "^1.2.2",
+    "@iconify-json/eos-icons": "^1.2.4",
     "@iconify-json/material-symbols": "^1.2.30",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/ph": "^1.2.2",
